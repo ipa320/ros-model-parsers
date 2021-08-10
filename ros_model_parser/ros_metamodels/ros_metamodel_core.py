@@ -138,7 +138,7 @@ class Parameter(object):
         self.type = self.get_type(value, default, type)
         self.count = 0
 
-    def get_type(self, value, default, given_type):
+    def get_type(self, value, default=None, given_type=None):
         if given_type != None:
           return given_type
         elif value!=None:
@@ -150,7 +150,7 @@ class Parameter(object):
 
     def get_type_from_value(self, value):
         param_type = type(value)
-        param_type = (str(param_type)).replace("<type '", "").replace("<class  '", "").replace("'>", "")
+        param_type = (str(param_type)).replace("<type '", "").replace("<class '", "").replace("'>", "")
         if param_type == 'float':
             return 'Double'
         elif param_type == 'bool':
@@ -255,7 +255,7 @@ class Parameter(object):
         if self.type == 'List':
             str_param += self.form_list(self.value)
         if self.default:
-           str_param += '{default ' + self.set_value(self.default, indent)+"}"
+           str_param += 'default ' + self.set_value(self.default, indent)
         if self.value:
            str_param += 'value ' + self.set_value(self.value, indent)
         str_param += "}"
